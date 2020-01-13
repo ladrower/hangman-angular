@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, createReducer, on } from '@ngrx/store';
+import {createFeatureSelector, createSelector, createReducer, on, ActionReducer} from '@ngrx/store';
 import { AuthActions } from '../actions';
 import * as fromRoot from '../../reducers';
 
@@ -22,7 +22,7 @@ const reducer = createReducer(
 
 export const authFeatureKey = 'auth';
 
-export interface AppState extends fromRoot.State {
+export interface State extends fromRoot.State {
   [authFeatureKey]: AuthState;
 }
 
@@ -30,13 +30,32 @@ export function authReducer(state, action) {
   return reducer(state, action);
 }
 
-export const selectAuthState = createFeatureSelector<AppState, AuthState>(
+export function authMetaReducer(reduce: ActionReducer<any>): ActionReducer<any> {
+  let initialised = false;
+  return (state, action) => {
+    const nextState = reduce(state, action);
+
+    if (!initialised) {
+      initialised = true;
+      return {...nextState, token: localStorage.getItem('accessToken') };
+    }
+
+    return nextState;
+  };
+}
+
+export const selectAuthState = createFeatureSelector<State, AuthState>(
   authFeatureKey
 );
 
-export const selectLoggedIn = createSelector(
+export const selectToken = createSelector(
   selectAuthState,
-  state => state.token !== null
+  state => state.token
+);
+
+export const selectLoggedIn = createSelector(
+  selectToken,
+  token => token !== null
 );
 
 export const selectPending = createSelector(

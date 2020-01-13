@@ -1,0 +1,12 @@
+.auth-container {
+  max-width: 500px;
+  margin: 50px auto;
+}
+.auth-container .auth-field {
+  width: 100%;
+}
+.auth-container .auth-button {
+  width: 100%;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse, HttpErrorResponse} from '@angular/common/http';
 import { Observable, of, throwError, timer } from 'rxjs';
-import { delay, mergeMap, tap } from 'rxjs/operators';
+import {delay, switchMap, tap} from 'rxjs/operators';
 import { data as wordsList } from '../../mock/data/words.json';
 import { GameService } from '../../mock/game/GameService';
 import { HTTPCode } from '../../mock/HTTPCode';
@@ -23,7 +23,7 @@ export class MockInterceptor implements HttpInterceptor {
     }
     return timer(100 + Math.random() * 200)
       .pipe(
-        mergeMap(() => throwError(new HttpErrorResponse({error: data, status: code})))
+        switchMap(() => throwError(new HttpErrorResponse({error: data, status: code})))
       );
   }
 

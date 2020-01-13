@@ -1,1 +1,18 @@
-<p>auth-container works!</p>
+<div class="auth-container">
+  <mat-card [class.mat-elevation-z4]="true">
+    <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+
+      <mat-form-field class="auth-field">
+        <input matInput name="username" [(ngModel)]="username" placeholder="Username" required autofocus autocomplete="off" />
+      </mat-form-field>
+      <button mat-raised-button
+              class="auth-button"
+              color="primary"
+              type="submit"
+              [disabled]="!authForm.form.valid || (authenticating$ | async)">
+        Login
+      </button>
+      <mat-progress-bar *ngIf="authenticating$ | async" mode="indeterminate"></mat-progress-bar>
+    </form>
+  </mat-card>
+</div>

@@ -17,7 +17,7 @@ export class CoreContainerComponent implements OnInit {
   loggedIn$: Observable<boolean>;
 
   constructor(
-    private store: Store<fromAuth.AppState>,
+    private store: Store<fromAuth.State>,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
