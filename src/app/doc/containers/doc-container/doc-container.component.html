@@ -1,0 +1,12 @@
+<div class="doc-container">
+  <app-doc-item *ngFor="let key of docKeys"
+    [method]="docCollection[key].method"
+    [caption]="docCollection[key].caption"
+    [endpoint]="key"
+    [busy]="docCollection[key].pending$ | async"
+    [successMessage]="docCollection[key].response$ | async"
+    [errorMessage]="docCollection[key].errorResponse$ | async"
+    [docForm]="docCollection[key].doc"
+    (execute)="executeEndpoint($event)">
+  </app-doc-item>
+</div>

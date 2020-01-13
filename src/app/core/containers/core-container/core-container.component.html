@@ -1,0 +1,7 @@
+<app-layout [title]="routeTitle$ | async" [loggedIn]="loggedIn$ | async" (logout)="logout()">
+  <router-outlet></router-outlet>
+</app-layout>
+
+
+<!--    <input type="text" [(ngModel)]="title" />-->
+<!--    <span>{{ title }} app is running!</span>-->

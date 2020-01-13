@@ -1,0 +1,9 @@
+.welcome-card {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 500px;
+}
+.welcome-card h3 {
+  line-height: 2;
+  font-weight: normal;
+}

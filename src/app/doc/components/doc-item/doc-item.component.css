@@ -1,0 +1,28 @@
+.doc-item {
+  margin: 20px 0;
+}
+.doc-item .caption {
+  text-transform: uppercase;
+  padding: 10px 0;
+  border-bottom: 1px solid #dfdfdf;
+}
+.doc-item .form-field {
+  width: 100%;
+}
+.doc-item .button-submit {
+  text-transform: uppercase;
+  margin: 5px 0;
+}
+.doc-item .success-message,
+.doc-item .error-message {
+  margin: 10px 0;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+}
+.doc-item .success-message {
+  background-color: limegreen;
+}
+.doc-item .error-message {
+  background-color: red;
+}

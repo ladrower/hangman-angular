@@ -1,0 +1,28 @@
+<mat-card class="doc-item" [class.mat-elevation-z4]="true">
+  <mat-card-title>
+    <mat-chip-list>
+      <mat-chip>{{method}}</mat-chip>
+      /{{endpoint}}
+    </mat-chip-list>
+  </mat-card-title>
+  <mat-card-subtitle class="caption">{{caption}}</mat-card-subtitle>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="docForm.form">
+      <mat-form-field *ngFor="let field of docForm.fields" class="form-field">
+        <input matInput [placeholder]="field.label" [formControlName]="field.name" autofocus autocomplete="off" />
+      </mat-form-field>
+      <button mat-raised-button
+              class="button-submit"
+              color="primary"
+              type="submit"
+              [disabled]="!docForm.form.valid || busy">
+        Execute
+      </button>
+      <mat-progress-bar *ngIf="busy" mode="indeterminate"></mat-progress-bar>
+      <div [class.success-message]="successMessage" [class.error-message]="errorMessage" *ngIf="successMessage || errorMessage" [class.mat-elevation-z4]="true">
+        {{successMessage || errorMessage}}
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
