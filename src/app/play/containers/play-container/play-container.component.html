@@ -1,1 +1,48 @@
-<p>play-container works!</p>
+<div class="play-container">
+  <mat-card>
+    <div class="error-message" *ngIf="error$ | async">{{error$ | async}}</div>
+
+    <div *ngIf="busy$ | async; else gameBlock" class="game-placeholder"></div>
+    <ng-template #gameBlock>
+      <mat-chip-list>
+        <mat-chip
+          [color]="(game$ | async)?.attemptsLeft === 0 ? 'accent' : 'primary'"
+          [selected]="(game$ | async)?.attemptsLeft === 0">
+          Attempts Left: {{(game$ | async)?.attemptsLeft}}
+        </mat-chip>
+        <span class="fill-remaining-space"></span>
+        <mat-chip>Score: {{(game$ | async)?.score}}</mat-chip>
+      </mat-chip-list>
+      <div class="puzzle">{{puzzle$ | async}}</div>
+    </ng-template>
+
+    <div *ngIf="(game$ | async)?.gameOver; let reason" class="game-over">
+      <mat-card class="game-won" *ngIf="reason === 'win'">Congratulations! Your score is {{(game$ | async)?.score}}</mat-card>
+      <mat-card class="game-lost" *ngIf="reason === 'loss'">Sorry, you have lost</mat-card>
+    </div>
+
+    <button color="primary" class="load-game-btn"
+            mat-stroked-button
+            [class.mat-elevation-z4]="(game$ | async)?.gameOver"
+            [class.button-highlighted]="(game$ | async)?.gameOver"
+            (click)="loadGame(true)"
+            [disabled]="busy$ | async">
+      Load new word
+    </button>
+
+    <mat-progress-bar *ngIf="busy$ | async; else delimiterBlock" mode="indeterminate"></mat-progress-bar>
+    <ng-template #delimiterBlock>
+      <div class="delimiter"></div>
+    </ng-template>
+
+    <mat-grid-list cols="6" [class.area-disabled]="(busy$ | async) || (game$ | async)?.gameOver" >
+      <mat-grid-tile *ngFor="let char of chars">
+        <button mat-fab
+                class="char-button"
+                color="primary"
+                [disabled]="(charsUsed$ | async)?.has(char)"
+                (click)="makeGuess(char)">{{char}}</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</div>

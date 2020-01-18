@@ -7,6 +7,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatProgressBarModule,
+  MatGridListModule,
 } from '@angular/material';
 
 const MaterialComponents = [
@@ -17,6 +18,7 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatProgressBarModule,
+  MatGridListModule,
 ];
 
 @NgModule({

@@ -1,0 +1,58 @@
+.play-container {
+  max-width: 550px;
+  margin: 50px auto;
+}
+.play-container .puzzle {
+  text-align: center;
+  line-height: 1.5;
+  font-size: 40px;
+  margin: 10px 0;
+}
+.play-container .delimiter {
+  padding-bottom: 4px;
+  border-bottom: 1px solid #dfdfdf;
+  width: 100%;
+}
+.play-container .char-button,
+.play-container .load-game-btn {
+  text-transform: uppercase;
+}
+.play-container .load-game-btn {
+  margin: 5px 0;
+}
+.play-container .button-highlighted {
+  background-color: #3f51b5;
+  color: white;
+}
+.play-container .fill-remaining-space {
+  flex: 1 1 auto
+}
+.play-container .game-won,
+.play-container .game-lost {
+  color: white;
+  margin: 5px 0;
+}
+.play-container .game-won {
+  background-color: #4caf50;
+}
+.play-container .game-lost {
+  background-color: #2196f3;
+}
+.play-container .game-placeholder {
+  background-color: #eeeeee;
+  width: 100%;
+  height: 113px;
+}
+.play-container .area-disabled {
+  pointer-events: none;
+}
+.play-container .area-disabled .char-button {
+  background-color: #dfdfdf;
+}
+.play-container .error-message {
+  margin: 10px 0;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  background-color: red;
+}
