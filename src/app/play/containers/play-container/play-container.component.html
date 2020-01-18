@@ -2,18 +2,20 @@
   <mat-card>
     <div class="error-message" *ngIf="error$ | async">{{error$ | async}}</div>
 
-    <div *ngIf="busy$ | async; else gameBlock" class="game-placeholder"></div>
-    <ng-template #gameBlock>
+    <div *ngIf="game$ | async; let game; else placeholderBlock">
       <mat-chip-list>
         <mat-chip
-          [color]="(game$ | async)?.attemptsLeft === 0 ? 'accent' : 'primary'"
-          [selected]="(game$ | async)?.attemptsLeft === 0">
-          Attempts Left: {{(game$ | async)?.attemptsLeft}}
+          [color]="game.attemptsLeft === 0 ? 'accent' : 'primary'"
+          [selected]="game.attemptsLeft === 0">
+          Attempts Left: {{game.attemptsLeft}}
         </mat-chip>
         <span class="fill-remaining-space"></span>
-        <mat-chip>Score: {{(game$ | async)?.score}}</mat-chip>
+        <mat-chip>Score: {{game.score}}</mat-chip>
       </mat-chip-list>
       <div class="puzzle">{{puzzle$ | async}}</div>
+    </div>
+    <ng-template #placeholderBlock>
+      <div class="game-placeholder"></div>
     </ng-template>
 
     <div *ngIf="(game$ | async)?.gameOver; let reason" class="game-over">

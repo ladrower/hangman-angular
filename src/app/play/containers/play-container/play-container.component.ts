@@ -28,16 +28,11 @@ export class PlayContainerComponent implements OnInit {
     this.busy$ = this.store.pipe(select(fromPlay.selectBusy));
     this.error$ = this.store.pipe(select(fromPlay.selectError));
     this.game$ = this.store.pipe(select(fromPlay.selectGame));
-    this.charsUsed$ = this.game$.pipe(
-      map((game) =>
-        new Set(game ? game.charsUsed.split('') : null)
-      )
-    );
-    this.puzzle$ = this.game$.pipe(
-      map((game) =>
-        game ? game.puzzle.map(char => char === null ? '_' : char).join(' ') : ''
-      )
-    );
+    this.charsUsed$ = this.store.pipe(select(fromPlay.selectCharsUsed));
+    this.puzzle$ = this.store.pipe(select(fromPlay.selectPuzzleString, {
+      unknown: '_',
+      separator: ' '
+    }));
 
     this.loadGame();
   }

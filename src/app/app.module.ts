@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterEffects } from './core/effects';
+import { RouterEffects, GameEffects } from './core/effects';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreContainerComponent } from './core/containers/core-container/core-container.component';
@@ -31,7 +31,7 @@ import { WelcomeModule } from './welcome/welcome.module';
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal,
     }),
-    EffectsModule.forRoot([RouterEffects]),
+    EffectsModule.forRoot([RouterEffects, GameEffects]),
     CoreModule
   ],
   bootstrap: [CoreContainerComponent]

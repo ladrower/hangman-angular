@@ -17,6 +17,10 @@ const initialState: PlayState = {
 
 const reducer = createReducer(
   initialState,
+
+  on(PlayActions.cleanup, (state) =>
+    ({ ...state, ...initialState })),
+
   on(PlayActions.loadGame, (state) =>
     ({ ...state, busy: true, error: '' })),
   on(PlayActions.loadGameSuccess, (state, data) =>
@@ -60,3 +64,15 @@ export const selectGame = createSelector(
   selectPlayState,
   ({game}) => game
 );
+
+export const selectCharsUsed = createSelector(
+  selectPlayState,
+  ({game}) => new Set(game ? game.charsUsed.split('') : null)
+);
+
+export const selectPuzzleString = createSelector(
+  selectPlayState,
+  ({game}, props: {unknown: string, separator: string}) =>
+    game ? game.puzzle.map(char => char === null ? props.unknown : char).join(props.separator) : ''
+);
+
