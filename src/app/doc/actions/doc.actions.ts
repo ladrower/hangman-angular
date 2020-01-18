@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Game } from '../models/game';
+import { Game } from '../../core/models/game';
 
 export const checkin = createAction('[Doc] Checkin', props<{ username: string }>());
 export const checkinSuccess = createAction('[Doc] Checkin success', props<{ token: string }>());
